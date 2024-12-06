@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   backend:
     build:
@@ -7,7 +6,16 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - NODE_ENV=production
+      - DOCKER_CONTAINER=true
+      - DB_DIALECT=mysql
+      - DB_HOST=mysql
+      - DB_NAME=mern_assessment
+      - DB_USERNAME=root
+      - DB_PASSWORD=mYR00t_paSS
+      - DB_PORT=3306
+      - SECRET=mysecretkey
+      - REDIS_HOST=redis  # Instead of localhost or 127.0.0.1
+      - REDIS_PORT=6379   # Default Redis port
     depends_on:
       - mysql
       - redis
@@ -18,20 +26,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:80"
-    stdin_open: true
 
   mysql:
     image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mern_assessment
+      - MYSQL_ROOT_PASSWORD=mYR00t_paSS
+      - MYSQL_DATABASE=mern_assessment
     ports:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
   redis:
-    image: redis:7
+    image: redis:latest
     ports:
       - "6379:6379"
     volumes:
