@@ -14,7 +14,6 @@ function ProductList() {
             Authorization: localStorage.getItem("token")
         }}); 
         setProducts(response.data.products);
-        console.log(response)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);

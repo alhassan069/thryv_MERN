@@ -20,7 +20,6 @@ function RecentlyViewed({allItems}) {
             Authorization: token,
           },
         });
-        console.log(response.data?.recentlyViewed)
         setRecentlyViewed(response.data?.recentlyViewed);
         setLoading(false);
       } catch (err) {
